@@ -9,10 +9,10 @@ import java.net.URLEncoder
 object WhatsAppService {
 
     private const val WHATSAPP = "com.whatsapp"
-    private const val TEL = "+79031797722"
+    private const val TEL = "+XXXXXXXXXX"
     private var url = "https://api.whatsapp.com/send?phone=$TEL&text=${
         URLEncoder.encode(
-            "HERE WILL BE A CODE IN THE NEAR FUTURE",
+            "Hi, there",
             "UTF-8"
         )
     }"
