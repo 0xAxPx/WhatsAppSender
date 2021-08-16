@@ -3,29 +3,34 @@ package com.example.scrapper.whatsapp
 import android.content.Intent
 import android.net.Uri
 import android.widget.Toast
+import androidx.compose.runtime.MutableState
 import com.example.scrapper.util.Utils
 import java.net.URLEncoder
 
 object WhatsAppService {
 
     private const val WHATSAPP = "com.whatsapp"
-    private const val TEL = "+XXXXXXXXXX"
-    private var url = "https://api.whatsapp.com/send?phone=$TEL&text=${
-        URLEncoder.encode(
-            "Hi, there",
-            "UTF-8"
-        )
-    }"
 
-    fun sendMessage() {
+    fun sendMessage(phone: MutableState<String>) {
         val context = Utils.context()
-        if (Utils.isPackageInstalled(WHATSAPP)) {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            intent.setPackage(WHATSAPP)
-            context.startActivity(intent)
+        if (phone.value.isEmpty()) {
+            Toast.makeText(context, "Telephone number is missing!", Toast.LENGTH_LONG).show()
         } else {
-            Toast.makeText(Utils.context(), "$WHATSAPP is not installed", Toast.LENGTH_LONG).show()
+            val url = "https://api.whatsapp.com/send?phone=${phone.value}&text=${
+                URLEncoder.encode(
+                    "Hi, there",
+                    "UTF-8"
+                )
+            }"
+            if (Utils.isPackageInstalled(WHATSAPP)) {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                intent.setPackage(WHATSAPP)
+                context.startActivity(intent)
+            } else {
+                Toast.makeText(Utils.context(), "$WHATSAPP is not installed", Toast.LENGTH_LONG)
+                    .show()
+            }
         }
     }
 }

@@ -4,7 +4,9 @@ import android.content.Context
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import com.example.scrapper.ui.ExploreButtonOnScreen
+import androidx.compose.ui.ExperimentalComposeUiApi
+import com.example.scrapper.ui.MainContent
+import com.example.scrapper.ui.theme.MainTheme
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,10 +22,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @ExperimentalComposeUiApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ExploreButtonOnScreen()
+            MainTheme {
+                MainContent()
+            }
         }
     }
 }
