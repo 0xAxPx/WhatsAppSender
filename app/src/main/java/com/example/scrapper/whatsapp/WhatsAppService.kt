@@ -11,14 +11,14 @@ object WhatsAppService {
 
     private const val WHATSAPP = "com.whatsapp"
 
-    fun sendMessage(phone: MutableState<String>) {
+    fun sendMessage(phone: MutableState<String>, message: MutableState<String>) {
         val context = Utils.context()
-        if (phone.value.isEmpty()) {
-            Toast.makeText(context, "Telephone number is missing!", Toast.LENGTH_LONG).show()
+        if (phone.value.isEmpty() || message.value.isEmpty()) {
+            Toast.makeText(context, "You phone number / message  is missing!", Toast.LENGTH_LONG).show()
         } else {
             val url = "https://api.whatsapp.com/send?phone=${phone.value}&text=${
                 URLEncoder.encode(
-                    "Hi, there",
+                    message.value,
                     "UTF-8"
                 )
             }"

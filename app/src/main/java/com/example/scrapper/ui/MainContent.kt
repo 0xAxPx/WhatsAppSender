@@ -18,66 +18,85 @@ import com.example.scrapper.whatsapp.WhatsAppService
 @Preview
 @Composable
 fun MainContent() {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colors.primary),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceEvenly
-    ) {
-        MaterialTheme {
-            TelephoneEditText()
-        }
-
+    MaterialTheme {
+        UserData()
     }
-
 }
 
 @Preview
 @Composable
-fun TelephoneEditText() {
-    val textValue = remember {
-        mutableStateOf("")
+fun UserData() {
+    Column(
+        modifier = Modifier
+        .fillMaxSize()
+        .background(MaterialTheme.colors.primary),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceEvenly) {
+        val phoneValue = remember {
+            mutableStateOf("")
+        }
+        val messageValue = remember {
+            mutableStateOf("")
+        }
+        OutlinedTextField(
+            value = phoneValue.value,
+            onValueChange = { phoneValue.value = it },
+            label = {
+                Text(
+                    text = stringResource(
+                        id = R.string.phoneNumber
+                    ),
+                    style = TextStyle(
+                        color = MaterialTheme.colors.primaryVariant
+                    )
+                )
+            },
+            placeholder = {
+                Text(
+                    text = stringResource(id = R.string.phone_placeholder),
+                    style = TextStyle(
+                        color = MaterialTheme.colors.primaryVariant,
+                        textAlign = TextAlign.Center
+                    )
+                )
+            },
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                focusedBorderColor = MaterialTheme.colors.primaryVariant,
+                unfocusedBorderColor = MaterialTheme.colors.primaryVariant,
+                focusedLabelColor = MaterialTheme.colors.primaryVariant,
+                cursorColor = MaterialTheme.colors.primaryVariant
+            ),
+            maxLines = 1
+        )
+        OutlinedTextField(
+            value = messageValue.value,
+            onValueChange = { messageValue.value = it },
+            label = {
+                Text(
+                    text = stringResource(
+                        id = R.string.message
+                    ),
+                    style = TextStyle(
+                        color = MaterialTheme.colors.secondary
+                    )
+                )
+            },
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                focusedBorderColor = MaterialTheme.colors.primaryVariant,
+                unfocusedBorderColor = MaterialTheme.colors.primaryVariant,
+                focusedLabelColor = MaterialTheme.colors.primaryVariant,
+                cursorColor = MaterialTheme.colors.primaryVariant
+            ),
+        )
+        WhatsAppButton(phoneValue, messageValue)
     }
-
-    OutlinedTextField(
-        value = textValue.value,
-        onValueChange = { textValue.value = it },
-        label = {
-            Text(
-                text = stringResource(
-                    id = R.string.phoneNumber
-                ),
-                style = TextStyle(
-                    color = MaterialTheme.colors.primaryVariant
-                )
-            )
-        },
-        placeholder = {
-            Text(
-                text = stringResource(id = R.string.phone_placeholder),
-                style = TextStyle(
-                    color = MaterialTheme.colors.primaryVariant,
-                    textAlign = TextAlign.Center
-                )
-            )
-        },
-        colors = TextFieldDefaults.outlinedTextFieldColors(
-            focusedBorderColor = MaterialTheme.colors.primaryVariant,
-            unfocusedBorderColor = MaterialTheme.colors.primaryVariant,
-            focusedLabelColor = MaterialTheme.colors.primaryVariant,
-            cursorColor = MaterialTheme.colors.primaryVariant
-        ),
-        maxLines = 1
-    )
-    WhatsAppButton(textValue)
 }
 
 @Composable
-fun WhatsAppButton(phone: MutableState<String>) {
+fun WhatsAppButton(phone: MutableState<String>, message: MutableState<String>) {
     Button(
         onClick = {
-            WhatsAppService.sendMessage(phone)
+            WhatsAppService.sendMessage(phone, message)
         },
         colors = ButtonDefaults.buttonColors(
             backgroundColor = MaterialTheme.colors.primary,
