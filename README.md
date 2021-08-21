@@ -8,6 +8,20 @@ UI is based on <a href="https://developer.android.com/jetpack/compose">Android C
 
 <p></p>
 
+Main view
+![alt text](https://github.com/AlexPeshkov/WhatsAppSender/blob/feature/material_theme/app/src/main/res/screenshots/main.png)
+
+
+<p></p>
+
+Phone and Message Edit Text
+![alt text](https://github.com/AlexPeshkov/WhatsAppSender/blob/feature/material_theme/app/src/main/res/screenshots/phone.png)
+
+<p></p>
+
+![alt text](https://github.com/AlexPeshkov/WhatsAppSender/blob/feature/material_theme/app/src/main/res/screenshots/message.png)
+
 User enters a message and contact phone and the message is sent to the Whatsapp contact by Android Intent
+![alt text](https://github.com/AlexPeshkov/WhatsAppSender/blob/feature/material_theme/app/src/main/res/screenshots/contact.png)
 
 
