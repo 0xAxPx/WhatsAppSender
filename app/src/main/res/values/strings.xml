@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Scrapper</string>
+    <string name="app_name">WhatAppSender</string>
     <string name="send">SEND</string>
     <string name="phoneNumber">Enter your phone</string>
     <string name="phone_placeholder">+X XXX XXX XX XX</string>
